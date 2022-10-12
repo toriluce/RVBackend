@@ -7,4 +7,6 @@ app.get("/ping", function(req, res) {
         message: "ping works"});
   });
 
-  app.listen(3001)
+const port = 3001;
+
+app.listen(port);
