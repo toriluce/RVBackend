@@ -1,12 +1,17 @@
-const express = require('express');
+import express from 'express';
+import dotenv from "dotenv"
+dotenv.config()
+import cors from "cors";
 
 const app = express();
 
+app.use(cors({ origin: true, credentials: true }));
+
 app.get("/ping", function(req, res) {
     res.json({
-        message: "ping works"});
+        message: "Ping works!"});
   });
 
-const port = 3001;
+const port = process.env.PORT || 3001;
 
-app.listen(port);
+app.listen(port, () => console.log(`Server is running on port ${port}`));
