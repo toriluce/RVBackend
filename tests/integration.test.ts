@@ -2,6 +2,7 @@ import axios from "axios";
 import { DynamoDBClient, GetItemCommand } from "@aws-sdk/client-dynamodb";
 
 const REGION = "us-east-1";
+const ddbClient = new DynamoDBClient({ region: REGION });
 const url = "http://localhost:3001";
 
 describe("/ping", () => {
@@ -22,12 +23,12 @@ describe("/admin/campground", () => {
       photos: ["photo1"],
       description: "The best RV park for a canyon view!",
     });
-    const ddbClient = new DynamoDBClient({ region: REGION });
+
     const dbRes = await ddbClient.send(
       new GetItemCommand({
         TableName: "Campgrounds",
         Key: {
-          S: createCampgroundResult.data.campgroundId,
+          campgroundId: { S: createCampgroundResult.data.campgroundId },
         },
       })
     );
