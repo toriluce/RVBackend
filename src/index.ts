@@ -8,7 +8,7 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 const app = express();
 app.use(cors({ origin: true, credentials: true }));
 
-REGION = "us-east-1"
+const REGION = "us-east-1"
 
 const client = new DynamoDBClient({ region: REGION });
 
