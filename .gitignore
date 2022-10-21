@@ -8,6 +8,8 @@ npm-debug.log
 .env
 .passport.js
 .DS_Store
+.prettierrc
+.vscode
 
 build/
 dist/
