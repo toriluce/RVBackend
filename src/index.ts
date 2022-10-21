@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from "dotenv"
 dotenv.config()
 import cors from "cors";
-import { createCampgroundHandler, sendPingHandler, getCampgroundsHandler } from './handlers';
+import { createCampgroundHandler, sendPingHandler, getAllCampgroundsHandler } from './handlers';
 
 const app = express();
 
@@ -12,7 +12,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 app.get("/ping", sendPingHandler);
 
-app.get("/campgrounds", getCampgroundsHandler);
+app.get("/campgrounds", getAllCampgroundsHandler);
 
 app.post("/admin/campground", createCampgroundHandler);
 

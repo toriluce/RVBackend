@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
-import { getItemsFromCampgrounds, putItemToCampgrounds } from "./dynamo";
+import { getAllCampgrounds, putCampground } from "./dynamo";
 
 /**
  * This is the handler for the /admin/campground endpoint.
@@ -23,7 +23,7 @@ export const createCampgroundHandler = async (
     description: req.body.description,
   };
 
-  await putItemToCampgrounds(newCampground);
+  await putCampground(newCampground);
 
   res.status(201);
   res.send(newCampground);
@@ -36,11 +36,11 @@ export const createCampgroundHandler = async (
  * @param req Express request
  * @param res Express Response
  */
-export const getCampgroundsHandler = async (
+export const getAllCampgroundsHandler = async (
   req: Request,
   res: Response
 ) => {
-    const campgrounds = await getItemsFromCampgrounds();
+    const campgrounds = await getAllCampgrounds();
     res.send(campgrounds);
 };
 

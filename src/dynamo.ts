@@ -12,7 +12,7 @@ const REGION = "us-east-1";
 
 const ddbClient = new DynamoDBClient({ region: REGION });
 
-export const putItemToCampgrounds = async (item: any) => {
+export const putCampground = async (item: any) => {
   await ddbClient.send(
     new PutItemCommand({
       TableName: "Campgrounds",
@@ -21,7 +21,7 @@ export const putItemToCampgrounds = async (item: any) => {
   );
 };
 
-export const getItemsFromCampgrounds = async () => {
+export const getAllCampgrounds = async () => {
   const scanResult = await ddbClient.send(
     new ScanCommand({
       TableName: "Campgrounds",
