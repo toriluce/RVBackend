@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
-import { getAllCampgrounds, putCampground, getRequestedCampground } from "./dynamo";
+import { getAllCampgrounds, putCampground, getRequestedCampground, putReservedDate } from "./dynamo";
 
 /**
  * This is the handler for the /admin/campground endpoint.
@@ -59,4 +59,26 @@ export const getRequestedCampgroundHandler = async (
     req.params.campgroundId
   );
   res.send(requestedCampground);
+};
+
+/**
+ * 
+ */
+ export const createReservedDateHandler = async (
+  req: Request,
+  res: Response
+) => {
+  const newReservedDate = {
+    siteId: req.body.siteId,
+    date: req.body.date,
+    campgroundId: req.body.campgroundId,
+    customerId: req.body.customerId,
+    reservationId: req.body.reservationId,
+    reservationCompleted: req.body.reservationCompleted
+  };
+
+  await putReservedDate(newReservedDate);
+
+  res.status(201);
+  res.send(newReservedDate);
 };

@@ -66,3 +66,16 @@ export const getRequestedCampground = async (
 
   return unmarshall(result.Item);
 };
+
+/**
+ * This function takes a reservedDate object and sends it to the dynamodb ReservedDates table.
+ * @param item reservedDate object to send to table
+ */
+ export const putReservedDate = async (item: any) => {
+  await ddbClient.send(
+    new PutItemCommand({
+      TableName: "ReservedDates",
+      Item: marshall(item),
+    })
+  );
+};
