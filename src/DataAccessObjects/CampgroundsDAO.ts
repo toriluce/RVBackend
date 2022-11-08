@@ -9,6 +9,8 @@ import {
   unmarshall,
 } from "@aws-sdk/util-dynamodb";
 
+import CampgroundInterface from "../../models/ICampground";
+
 const REGION = "us-east-1";
 
 const ddbClient = new DynamoDBClient({ region: REGION });
@@ -17,7 +19,9 @@ const ddbClient = new DynamoDBClient({ region: REGION });
  * This function takes a campground object and sends it to the dynamodb Campgrounds table.
  * @param item Campground object to send to table
  */
-export const putCampground = async (item: any) => {
+export const putCampground = async (
+  item: CampgroundInterface
+) => {
   await ddbClient.send(
     new PutItemCommand({
       TableName: "Campgrounds",
@@ -48,8 +52,8 @@ export const getAllCampgrounds = async () => {
  *This function retrieves the campground requested from the dynamodb Campgrounds table.
  * @returns requested unmarshalled Campground object
  */
-export const getRequestedCampground = async (
-  campgroundId: any
+export const getCampground = async (
+  campgroundId: string
 ) => {
   const result = await ddbClient.send(
     new GetItemCommand({
@@ -61,21 +65,10 @@ export const getRequestedCampground = async (
   );
 
   if (!result.Item) {
-    throw new Error("Campground item unable to be returned");
+    throw new Error(
+      "Campground item unable to be returned"
+    );
   }
 
   return unmarshall(result.Item);
-};
-
-/**
- * This function takes a reservedDate object and sends it to the dynamodb ReservedDates table.
- * @param item reservedDate object to send to table
- */
- export const putReservedDate = async (item: any) => {
-  await ddbClient.send(
-    new PutItemCommand({
-      TableName: "ReservedDates",
-      Item: marshall(item),
-    })
-  );
 };
