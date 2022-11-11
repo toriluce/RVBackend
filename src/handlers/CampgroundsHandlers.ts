@@ -4,7 +4,6 @@ import * as CampgroundsDAO from "../DataAccessObjects/CampgroundsDAO";
 
 /**
  * This is the handler for the /admin/campground endpoint.
- *
  * It creates a new campground and saves it in dynamodb.
  * @param req Express request
  * @param res Express response
@@ -31,7 +30,6 @@ export const createCampgroundHandler = async (
 
 /**
  * This in the handler for the /campgrounds endpoint.
- *
  * It returns all campgrounds in Campground table from dynamodb.
  * @param req Express request
  * @param res Express response
@@ -47,7 +45,6 @@ export const getAllCampgroundsHandler = async (
 
 /**
  * This in the handler for the /:campgroundName endpoints.
- *
  * It returns requested campground's webpage and required db info.
  * @param req Express request
  * @param res Express response

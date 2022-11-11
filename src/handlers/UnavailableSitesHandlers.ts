@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import * as UnavailableSitesDAO from "../DataAccessObjects/UnavailableSitesDAO";
 
 /**
+ * This in the handler for the /admin/unavailableSite endpoint.
  * Send UnavailableSite to DDB.
  * @param req express request
  * @param res Newly unavailable site
@@ -29,6 +30,7 @@ export const createUnavailableSiteHandler = async (
 };
 
 /**
+ * This in the handler for the /unavailableSites endpoint.
  * Retrieve unavailable sites given date range from ddb.
  * @param req express request
  * @param res express response
@@ -39,8 +41,9 @@ export const getUnavailableSitesHandler = async (
 ) => {
   const unavailableSites =
     await UnavailableSitesDAO.getUnavailableSites(
-      req.params.startDate,
-      req.params.endDate
+      req.params.campgroundId,
+      req.query.startDate as string,
+      req.query.endDate as string
     );
   res.send(unavailableSites);
 };

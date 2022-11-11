@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
-import * as SitesDao from "../DataAccessObjects/SitesDAO";
+import * as SitesDAO from "../DataAccessObjects/SitesDAO";
 import SiteInterface from "../../models/ISite";
 
 /**
- * This is the handler for the /sites endpoint. It returns the site object for a given siteId.
+ * This is the handler for the /sites:siteId endpoint. 
+ * It returns the site object for a given siteId.
  * @param req express request
  * @param res express response
  */
@@ -12,14 +13,32 @@ export const getSiteHandler = async (
   req: Request,
   res: Response
 ) => {
-  const requestedSite = await SitesDao.getSite(
+  const requestedSite = await SitesDAO.getSite(
     req.params.siteId
   );
   res.send(requestedSite);
 };
 
 /**
- * This is the handler for the /admin/site endpoint. It creates a new site and saves it in dynamodb.
+ * This is the handler for the /campgrounds/:campgroundId/sites endpoint. 
+ * It returns a list of all sites at a given campground.
+ * @param req express request
+ * @param res express response
+ */
+export const getSitesAtCampgroundHandler = async (
+  req: Request,
+  res: Response
+) => {
+  const sitesAtCampground =
+    await SitesDAO.getSitesAtCampground(
+      req.params.campgroundId
+    );
+  res.send(sitesAtCampground);
+};
+
+/**
+ * This is the handler for the /admin/site endpoint. 
+ * It creates a new site and saves it in dynamodb.
  * @param req Express request
  * @param res Express response
  */
@@ -41,7 +60,7 @@ export const createSiteHandler = async (
     photos: req.body.photos,
     pricePerNight: req.body.pricePerNight,
   };
-  await SitesDao.putSite(newSite);
+  await SitesDAO.putSite(newSite);
 
   res.status(201);
   res.send(newSite);

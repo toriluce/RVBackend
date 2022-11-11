@@ -1,6 +1,8 @@
 import {
+  AttributeValue,
   DynamoDBClient,
   PutItemCommand,
+  QueryCommand,
   ScanCommand,
 } from "@aws-sdk/client-dynamodb";
 import {
@@ -30,22 +32,35 @@ export const putUnavailableSite = async (
 
 /**
  * This function receives the starting and ending date of a desired reservation and finds which siteIds have bookings within that date range. If a siteId is returned, that siteId is not available for the entire desired reservation.
- * @param startingDate string
- * @param endingDate string
+ * @param startDate string
+ * @param endDate string
  * @returns list of UnavailableSites bookings or empty string
  */
 export const getUnavailableSites = async (
-  startingDate: string,
-  endingDate: string
+  campgroundId: string,
+  startDate: string,
+  endDate: string
 ) => {
   const result = await ddbClient.send(
-    new ScanCommand({
+    new QueryCommand({
       TableName: "UnavailableSites",
+      IndexName: "campgroundId-date-index",
+      KeyConditionExpression:
+        "#campgroundId = :campgroundId and #date BETWEEN :startDate AND :endDate",
+      ExpressionAttributeNames: {
+        "#campgroundId": "campgroundId",
+        "#date": "date",
+      },
+      ExpressionAttributeValues: {
+        ":startDate": { S: startDate },
+        ":endDate": { S: endDate },
+        ":campgroundId": { S: campgroundId },
+      },
     })
   );
 
   if (!result.Items) {
-    return "";
+    return null;
   }
 
   return result.Items.map((item) => unmarshall(item));

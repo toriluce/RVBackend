@@ -2,6 +2,7 @@ import {
   DynamoDBClient,
   GetItemCommand,
   PutItemCommand,
+  QueryCommand,
 } from "@aws-sdk/client-dynamodb";
 import {
   marshall,
@@ -34,6 +35,31 @@ export const getSite = async (siteId: string) => {
   }
 
   return unmarshall(result.Item);
+};
+
+/**
+ * This function takes a campgroundId and returns a list of all sites with the given campgroundId from ddb.
+ * @param campgroundId string
+ */
+export const getSitesAtCampground = async (
+  campgroundId: string
+) => {
+  const result = await ddbClient.send(
+    new QueryCommand({
+      KeyConditionExpression:
+        "campgroundId = :campgroundId",
+      ExpressionAttributeValues: {
+        ":campgroundId": { S: campgroundId },
+      },
+      TableName: "Sites",
+    })
+  );
+
+  if (!result.Items) {
+    throw new Error("No sites found");
+  }
+
+  return result.Items.map((item) => unmarshall(item));
 };
 
 /**

@@ -34,7 +34,7 @@ app.post(
 // UnavailableSites TABLE
 
 app.get(
-  "/unavailableSites",
+  "/campgrounds/:campgroundId/unavailableSites",
   UnavailableSitesHandlers.getUnavailableSitesHandler
 );
 
@@ -45,7 +45,9 @@ app.post(
 
 // Sites TABLE
 
-app.get("/sites", SitesHandlers.getSiteHandler);
+app.get("/sites/:siteId", SitesHandlers.getSiteHandler);
+
+app.get("/campgrounds/:campgroundId/sites", SitesHandlers.getSitesAtCampgroundHandler)
 
 app.post("/admin/site", SitesHandlers.createSiteHandler);
 
