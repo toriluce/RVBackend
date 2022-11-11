@@ -1,4 +1,5 @@
 interface ReservationInterface {
+  reservationId: string;
   campgroundId: string;
   customerId: string;
   startDate: string;

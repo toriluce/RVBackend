@@ -4,11 +4,11 @@ import {
 } from "@aws-sdk/client-dynamodb";
 import {
   marshall,
-  unmarshall,
 } from "@aws-sdk/util-dynamodb";
 import ReservationInterface from "../../models/IReservation";
 
 const REGION = "us-east-1";
+const TABLENAME = "Reservations"
 
 const ddbClient = new DynamoDBClient({ region: REGION });
 
@@ -21,7 +21,7 @@ export const putReservation = async (
 ) => {
   await ddbClient.send(
     new PutItemCommand({
-      TableName: "Reservations",
+      TableName: TABLENAME,
       Item: marshall(item),
     })
   );

@@ -4,11 +4,11 @@ import {
 } from "@aws-sdk/client-dynamodb";
 import {
   marshall,
-  unmarshall,
 } from "@aws-sdk/util-dynamodb";
 import CustomerInterface from "../../models/ICustomer";
 
 const REGION = "us-east-1";
+const TABLENAME = "Customers"
 
 const ddbClient = new DynamoDBClient({ region: REGION });
 
@@ -21,7 +21,7 @@ export const putCustomer = async (
 ) => {
   await ddbClient.send(
     new PutItemCommand({
-      TableName: "Customers",
+      TableName: TABLENAME,
       Item: marshall(item),
     })
   );

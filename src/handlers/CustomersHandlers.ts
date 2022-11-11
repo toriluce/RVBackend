@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
+import CustomerInterface from "../../models/ICustomer";
 import * as CustomersDAO from "../DataAccessObjects/CustomersDAO";
 
 /**
@@ -14,7 +15,7 @@ export const createCustomerHandler = async (
 ) => {
   const newUuid = uuidv4();
 
-  const newCustomer = {
+  const newCustomer: CustomerInterface = {
     customerId: "C." + newUuid,
     name: req.body.name,
     rvLength: req.body.rvLength,

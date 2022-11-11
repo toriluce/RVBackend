@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
+import ReservationInterface from "../../models/IReservation";
 import * as ReservationsDAO from "../DataAccessObjects/ReservationsDAO";
 
 /**
@@ -14,7 +15,7 @@ export const createReservationHandler = async (
 ) => {
   const newUuid = uuidv4();
 
-  const newReservation = {
+  const newReservation: ReservationInterface = {
     reservationId: "R." + newUuid,
     campgroundId: req.body.campgroundId,
     customerId: req.body.campgroundId,

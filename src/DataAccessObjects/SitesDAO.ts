@@ -12,6 +12,7 @@ import {
 import SiteInterface from "../../models/ISite";
 
 const REGION = "us-east-1";
+const TABLENAME = "Sites";
 
 const ddbClient = new DynamoDBClient({ region: REGION });
 
@@ -23,7 +24,7 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export const getSite = async (siteId: string) => {
   const result = await ddbClient.send(
     new GetItemCommand({
-      TableName: "Sites",
+      TableName: TABLENAME,
       Key: {
         siteId: { S: siteId },
       },
@@ -51,7 +52,7 @@ export const getSitesAtCampground = async (
       ExpressionAttributeValues: {
         ":campgroundId": { S: campgroundId },
       },
-      TableName: "Sites",
+      TableName: TABLENAME,
     })
   );
 
@@ -69,7 +70,7 @@ export const getSitesAtCampground = async (
 export const putSite = async (item: SiteInterface) => {
   await ddbClient.send(
     new PutItemCommand({
-      TableName: "Sites",
+      TableName: TABLENAME,
       Item: marshall(item),
     })
   );

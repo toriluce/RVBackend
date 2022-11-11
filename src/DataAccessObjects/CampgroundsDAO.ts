@@ -12,6 +12,7 @@ import {
 import CampgroundInterface from "../../models/ICampground";
 
 const REGION = "us-east-1";
+const TABLENAME = "Campgrounds"
 
 const ddbClient = new DynamoDBClient({ region: REGION });
 
@@ -24,7 +25,7 @@ export const putCampground = async (
 ) => {
   await ddbClient.send(
     new PutItemCommand({
-      TableName: "Campgrounds",
+      TableName: TABLENAME,
       Item: marshall(item),
     })
   );
@@ -37,7 +38,7 @@ export const putCampground = async (
 export const getAllCampgrounds = async () => {
   const scanResult = await ddbClient.send(
     new ScanCommand({
-      TableName: "Campgrounds",
+      TableName: TABLENAME,
     })
   );
 
@@ -57,7 +58,7 @@ export const getCampground = async (
 ) => {
   const result = await ddbClient.send(
     new GetItemCommand({
-      TableName: "Campgrounds",
+      TableName: TABLENAME,
       Key: {
         campgroundId: { S: campgroundId },
       },

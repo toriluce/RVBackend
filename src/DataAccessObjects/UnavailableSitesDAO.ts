@@ -12,6 +12,7 @@ import {
 import UnavailableSiteInterface from "../../models/IUnavailableSite";
 
 const REGION = "us-east-1";
+const TABLENAME = "UnavailableSites"
 
 const ddbClient = new DynamoDBClient({ region: REGION });
 
@@ -24,7 +25,7 @@ export const putUnavailableSite = async (
 ) => {
   await ddbClient.send(
     new PutItemCommand({
-      TableName: "UnavailableSites",
+      TableName: TABLENAME,
       Item: marshall(item),
     })
   );
@@ -43,7 +44,7 @@ export const getUnavailableSites = async (
 ) => {
   const result = await ddbClient.send(
     new QueryCommand({
-      TableName: "UnavailableSites",
+      TableName: TABLENAME,
       IndexName: "campgroundId-date-index",
       KeyConditionExpression:
         "#campgroundId = :campgroundId and #date BETWEEN :startDate AND :endDate",
