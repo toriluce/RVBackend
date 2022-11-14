@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use(cors({ origin: true, credentials: true }));
 
-// Campgrounds TABLE
+// Campgrounds Routes
 
 app.get(
   "/campgrounds",
@@ -31,34 +31,41 @@ app.post(
   CampgroundsHandlers.createCampgroundHandler
 );
 
-// UnavailableSites TABLE
+// Unavailable Sites Routes
 
 app.get(
   "/campgrounds/:campgroundId/unavailableSites",
   UnavailableSitesHandlers.getUnavailableSitesHandler
 );
 
+
+
 app.post(
   "/admin/unavailableSite",
   UnavailableSitesHandlers.createUnavailableSiteHandler
 );
 
-// Sites TABLE
+// Sites Routes
 
 app.get("/sites/:siteId", SitesHandlers.getSiteHandler);
 
 app.get("/campgrounds/:campgroundId/sites", SitesHandlers.getSitesAtCampgroundHandler)
 
+app.get(
+  "/campgrounds/:campgroundId/AvailableSites",
+  SitesHandlers.getAvailableSitesHandler
+);
+
 app.post("/admin/site", SitesHandlers.createSiteHandler);
 
-// Customers TABLE
+// Customers Routes
 
 app.post(
   "/admin/customer",
   CustomersHandlers.createCustomerHandler
 );
 
-// Reservations TABLE
+// Reservations Routes
 
 app.post(
   "/admin/reservation",

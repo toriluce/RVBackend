@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
+
 import * as SitesDAO from "../DataAccessObjects/SitesDAO";
+import * as UnavailableSitesDAO from "../DataAccessObjects/UnavailableSitesDAO";
 import SiteInterface from "../../models/ISite";
 
 /**
- * This is the handler for the /sites:siteId endpoint. 
+ * This is the handler for the /sites:siteId endpoint.
  * It returns the site object for a given siteId.
  * @param req express request
  * @param res express response
@@ -20,7 +22,7 @@ export const getSiteHandler = async (
 };
 
 /**
- * This is the handler for the /campgrounds/:campgroundId/sites endpoint. 
+ * This is the handler for the /campgrounds/:campgroundId/sites endpoint.
  * It returns a list of all sites at a given campground.
  * @param req express request
  * @param res express response
@@ -37,7 +39,7 @@ export const getSitesAtCampgroundHandler = async (
 };
 
 /**
- * This is the handler for the /admin/site endpoint. 
+ * This is the handler for the /admin/site endpoint.
  * It creates a new site and saves it in dynamodb.
  * @param req Express request
  * @param res Express response
@@ -64,4 +66,38 @@ export const createSiteHandler = async (
 
   res.status(201);
   res.send(newSite);
+};
+
+/**
+ * This is the handler for the /campgrounds/:campgroundId/availableSites endpoint.
+ * @param req Express request
+ * @param res Express response
+ * @returns list of sites available at given campground during given date range
+ */
+export const getAvailableSitesHandler = async (
+  req: Request,
+  res: Response
+) => {
+  const allSites =
+    await SitesDAO.getSitesAtCampground(
+      req.params.campgroundId
+    );
+
+  const unavailableSites =
+    await UnavailableSitesDAO.getUnavailableSites(
+      req.params.campgroundId,
+      req.query.startDate as string,
+      req.query.endDate as string
+    );
+
+  const availableSites: SiteInterface[] = allSites.filter(
+    (site: SiteInterface) => {
+      return !unavailableSites.find(
+        (unavailableSite) =>
+          unavailableSite.siteId === site.siteId
+      );
+    }
+  );
+
+  res.send(availableSites);
 };

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { v4 as uuidv4 } from "uuid";
+
 import * as UnavailableSitesDAO from "../DataAccessObjects/UnavailableSitesDAO";
 
 /**
@@ -31,7 +31,7 @@ export const createUnavailableSiteHandler = async (
 
 /**
  * This in the handler for the /unavailableSites endpoint.
- * Retrieve unavailable sites given date range from ddb.
+ * Retrieve unavailable sites given date range and campgroundId from ddb.
  * @param req express request
  * @param res express response
  */

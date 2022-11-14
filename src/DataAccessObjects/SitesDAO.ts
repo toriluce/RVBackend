@@ -44,7 +44,7 @@ export const getSite = async (siteId: string) => {
  */
 export const getSitesAtCampground = async (
   campgroundId: string
-) => {
+) :Promise<SiteInterface[]> => {
   const result = await ddbClient.send(
     new QueryCommand({
       KeyConditionExpression:
@@ -60,7 +60,7 @@ export const getSitesAtCampground = async (
     throw new Error("No sites found");
   }
 
-  return result.Items.map((item) => unmarshall(item));
+  return result.Items.map((item) => unmarshall(item) as SiteInterface);
 };
 
 /**
