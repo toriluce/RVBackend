@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import * as UnavailableSitesDAO from "../DataAccessObjects/UnavailableSitesDAO";
 
 /**
- * This in the handler for the /admin/unavailableSite endpoint.
+ * This is the handler for the /admin/unavailableSite endpoint.
  * Send UnavailableSite to DDB.
  * @param req express request
  * @param res Newly unavailable site
@@ -30,7 +30,7 @@ export const createUnavailableSiteHandler = async (
 };
 
 /**
- * This in the handler for the /unavailableSites endpoint.
+ * This is the handler for the /unavailableSites endpoint.
  * Retrieve unavailable sites given date range and campgroundId from ddb.
  * @param req express request
  * @param res express response

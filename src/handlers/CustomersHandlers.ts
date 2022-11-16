@@ -4,7 +4,7 @@ import CustomerInterface from "../../models/ICustomer";
 import * as CustomersDAO from "../DataAccessObjects/CustomersDAO";
 
 /**
- * This in the handler for the /admin/customer endpoint.
+ * This is the handler for the /admin/customer endpoint.
  * This handler receives a new customer and packages it for the customer DAO.
  * @param req express request
  * @param res express response

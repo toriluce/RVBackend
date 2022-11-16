@@ -38,8 +38,6 @@ app.get(
   UnavailableSitesHandlers.getUnavailableSitesHandler
 );
 
-
-
 app.post(
   "/admin/unavailableSite",
   UnavailableSitesHandlers.createUnavailableSiteHandler
