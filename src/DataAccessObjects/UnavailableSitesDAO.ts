@@ -41,7 +41,7 @@ export const getUnavailableSites = async (
   campgroundId: string,
   startDate: string,
   endDate: string
-) => {
+): Promise<UnavailableSiteInterface[]> => {
   const result = await ddbClient.send(
     new QueryCommand({
       TableName: TABLENAME,
@@ -61,8 +61,8 @@ export const getUnavailableSites = async (
   );
 
   if (!result.Items) {
-    return null;
+    return [];
   }
 
-  return result.Items.map((item) => unmarshall(item));
+  return result.Items.map((item) => unmarshall(item) as UnavailableSiteInterface);
 };

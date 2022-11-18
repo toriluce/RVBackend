@@ -4,7 +4,7 @@ import ReservationInterface from "../../models/IReservation";
 import * as ReservationsDAO from "../DataAccessObjects/ReservationsDAO";
 
 /**
- * This in the handler for the /admin/reservation endpoint.
+ * This is the handler for the /admin/reservation endpoint.
  * This handler receives and packages a new reservation object to send to the reservations DAO.
  * @param req express request
  * @param res express response
