@@ -5,7 +5,7 @@ import {
 import {
   marshall,
 } from "@aws-sdk/util-dynamodb";
-import CustomerInterface from "../../models/ICustomer";
+import CustomerInterface from "../models/ICustomer";
 
 const REGION = "us-east-1";
 const TABLENAME = "Customers"

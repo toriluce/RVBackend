@@ -5,7 +5,7 @@ import {
 import {
   marshall,
 } from "@aws-sdk/util-dynamodb";
-import ReservationInterface from "../../models/IReservation";
+import ReservationInterface from "../models/IReservation";
 
 const REGION = "us-east-1";
 const TABLENAME = "Reservations"

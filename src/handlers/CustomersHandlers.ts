@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
-import CustomerInterface from "../../models/ICustomer";
+import CustomerInterface from "../models/ICustomer";
 import * as CustomersDAO from "../DataAccessObjects/CustomersDAO";
 
 /**

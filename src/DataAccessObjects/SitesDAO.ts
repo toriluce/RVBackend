@@ -9,7 +9,7 @@ import {
   unmarshall,
 } from "@aws-sdk/util-dynamodb";
 
-import SiteInterface from "../../models/ISite";
+import SiteInterface from "../models/ISite";
 
 const REGION = "us-east-1";
 const TABLENAME = "Sites";
@@ -44,7 +44,7 @@ export const getSite = async (siteId: string) => {
  */
 export const getSitesAtCampground = async (
   campgroundId: string
-) :Promise<SiteInterface[]> => {
+): Promise<SiteInterface[]> => {
   const result = await ddbClient.send(
     new QueryCommand({
       KeyConditionExpression:

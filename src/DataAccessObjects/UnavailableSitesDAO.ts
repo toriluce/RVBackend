@@ -9,7 +9,7 @@ import {
   marshall,
   unmarshall,
 } from "@aws-sdk/util-dynamodb";
-import UnavailableSiteInterface from "../../models/IUnavailableSite";
+import UnavailableSiteInterface from "../models/IUnavailableSite";
 
 const REGION = "us-east-1";
 const TABLENAME = "UnavailableSites"

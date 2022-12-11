@@ -9,7 +9,7 @@ import {
   unmarshall,
 } from "@aws-sdk/util-dynamodb";
 
-import CampgroundInterface from "../../models/ICampground";
+import CampgroundInterface from "../models/ICampground";
 
 const REGION = "us-east-1";
 const TABLENAME = "Campgrounds"

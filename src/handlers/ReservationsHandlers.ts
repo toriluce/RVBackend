@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
-import ReservationInterface from "../../models/IReservation";
+import ReservationInterface from "../models/IReservation";
 import * as ReservationsDAO from "../DataAccessObjects/ReservationsDAO";
 
 /**

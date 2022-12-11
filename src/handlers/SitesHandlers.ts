@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import * as SitesDAO from "../DataAccessObjects/SitesDAO";
 import * as UnavailableSitesDAO from "../DataAccessObjects/UnavailableSitesDAO";
-import SiteInterface from "../../models/ISite";
+import SiteInterface from "../models/ISite";
 
 /**
  * This is the handler for the /sites:siteId endpoint.
