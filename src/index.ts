@@ -7,6 +7,7 @@ import * as CampgroundsHandlers from "./handlers/CampgroundsHandlers";
 import * as SitesHandlers from "./handlers/SitesHandlers";
 import * as CustomersHandlers from "./handlers/CustomersHandlers";
 import * as ReservationsHandlers from "./handlers/ReservationsHandlers";
+import serverlessExpress from '@vendia/serverless-express';
 
 const app = express();
 
@@ -75,3 +76,5 @@ const port = process.env.PORT || 3001;
 app.listen(port, () =>
   console.log(`Server is running on port ${port}`)
 );
+
+export const handler = serverlessExpress({ app })
